@@ -11,17 +11,13 @@ import androidx.room.RoomDatabase
  */
 @Database(entities = arrayOf(User::class), version = 1, exportSchema = false)
 public abstract class UserDatabase: RoomDatabase() {
-    abstract fun userDao(): Dao
+    abstract fun userDao(): com.example.movieapps.DB.Dao
 
     companion object {
-        // Singleton prevents multiple instances of database opening at the
-        // same time.
         @Volatile
         private var INSTANCE: UserDatabase? = null
 
         fun getDatabase(context: Context): UserDatabase {
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
@@ -29,7 +25,6 @@ public abstract class UserDatabase: RoomDatabase() {
                     "user_database"
                 ).build()
                 INSTANCE = instance
-                // return instance
                 instance
             }
         }

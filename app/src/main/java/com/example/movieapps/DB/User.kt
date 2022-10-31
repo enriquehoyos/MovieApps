@@ -9,4 +9,4 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "user_table")
 class User(@PrimaryKey @ColumnInfo(name = "user") val user: String,
-           @ColumnInfo(name = "password") val password: String?)
+           @ColumnInfo(name = "password") val password: String)

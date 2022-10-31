@@ -10,11 +10,14 @@ import androidx.room.Query
  */
 @Dao
 interface Dao {
+    @Query("SELECT * FROM user_table WHERE user LIKE :userName")
+    fun getName(userName: String): User?
+
     @Query("SELECT * FROM user_table ORDER BY user ASC")
     fun getAlphabetizedWords(): List<User>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(user: User)
+    fun insert(user: User)
 
     @Query("DELETE FROM user_table")
     suspend fun deleteAll()
